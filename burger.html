@@ -36,10 +36,13 @@
 
         <!-- LEFT -->
         <div class="psub">
-            <form onsubmit="return false;">
-                Client Chair:
-                <input id="clientChair" type="number" placeholder="Enter client chair">
-            </form>
+            <div class="chair-form-box">
+    <form onsubmit="return false;">
+        <label for="clientChair">Client Chair</label>
+        <input id="clientChair" type="number" placeholder="Enter client chair">
+    </form>
+</div>
+
 
             <button onclick="addToCart('Burger Chicken', 10)">Burger Chicken ($10)</button>
             <button onclick="addToCart('Burger Beef', 4)">Burger Beef ($4)</button>
@@ -252,5 +255,6 @@
 
         
     </div>-->
+
 
 
