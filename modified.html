@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart & Receipt System</title>
+
+    <!-- QZ Tray Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        #cart { margin-bottom: 20px; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px;
+            background: #f0f0f0;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        #clientChair {
+            width: 200px;
+            padding: 8px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px 5px 5px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Receipt Preview Box */
+        #receipt {
+            width: 260px; /* 80mm printer approximate width */
+            font-family: monospace;
+            padding: 10px;
+            border: 1px solid black;
+            margin: 20px auto;
+            display: none;
+            background: #fff;
+        }
+
+        #receipt h3, #receipt p {
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        #receipt-items p {
+            margin: 2px 0;
+        }
+
+        /* Print CSS (optional, only if printing preview) */
+        @media print {
+            body * { display: none !important; }
+            #receipt, #receipt * { display: block !important; }
+            #receipt { position: absolute; top: 0; left: 0; width: 260px; }
+        }
+       .parallel {
+    display: flex; /* Makes children side by side */
+    gap: 20px;     /* Space between the two columns */
+    width: 100%;
+    height: 80vh;
+    margin: 25px;
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: #0c0b0b;
+}
+
+.psub, .psubb {
+        background-color: gray;
+        flex: 1; /* Each takes equal space */
+        overflow-y: auto;
+        padding: 35px;
+}
+.psubb {
+        background-color: #6d6060;
+
+    border-left: 2px solid #ccc; /* optional separator */
+    padding-left: 20px;
+}
+/*.btn{
+    background-color: black;
+    width: 32%;
+    padding: 2px;
+    text-align: center;
+}*/
+    </style>
+</head>
+<body>
+
+
+
+
+
+<div class="parallel">
+    
+    <div class="psub">
+        <form onsubmit="return false;">
+    Client Chair:
+    <input id="clientChair" type="number" placeholder="Enter client chair">
+</form>
+       <button onclick="addToCart('Chicken', 10)">Add Chicken ($10)</button>
+<button onclick="addToCart('Pizza', 25)">Add Pizza ($25)</button>
+<button onclick="addToCart('Burger', 15)">Add Burger ($15)</button>
+<button onclick="addToCart('Sandwich', 5)">Add Sandwich ($5)</button>
+
+<button onclick="addToCart('chips', 3)">Add chips ($3)</button>
+<button onclick="addToCart('Shawarma', 5)">Add Shawarma ($5)</button>
+<button onclick="addToCart('Soda', 15)">Add Soda ($1)</button>
+<button onclick="addToCart('Snack', 5)">Add Snack ($6)</button>
+<button onclick="addToCart('Sanbusa', 1.5)">Add Sanbusa ($1.5)</button>
+
+<button onclick="addToCart('Rice', 10)">Add Rice ($10)</button>
+<button onclick="addToCart('Meat', 25)">Add Meat ($25)</button>
+<button onclick="addToCart('ANjer', 15)">Add ANjer ($15)</button>
+<button onclick="addToCart('HUmburger', 5)">Add HUmburger ($5)</button>
+
+<button onclick="addToCart('Past', 3)">Add Past ($3)</button>
+<button onclick="addToCart('MAcrona', 5)">Add MAcrona ($5)</button>
+<button onclick="addToCart('Juice', 15)">Add JuIce ($1)</button>
+<button onclick="addToCart('Tea', 5)">Add Tae ($6)</button>
+<button onclick="addToCart('Mandazi', 1.5)">Add Mandazi ($1.5)</button>
+<br><br>
+
+<button onclick="printReceipt()">Generate Receipt</button>
+
+    </div>
+
+    <div class="psubb">
+        <h2>Your Cart</h2>
+<div id="cart"></div>
+<h3 id="total">Total: $0</h3>
+    </div>
+</div>
+
+
+<!-- Receipt Preview -->
+<div id="receipt">
+    <!-- Logo placeholder -->
+    <h3>iShop Logo Here</h3>
+    <p>Store #01</p>
+    <p>Order#: <span id="orderNumber"></span></p>
+    <p>Date: <span id="receiptDate"></span></p>
+    <p>Client Chair: <span id="receiptChair"></span></p>
+    <p>It's our pleasure knowing you bought from us</p>
+    <hr>
+    <div id="receipt-items"></div>
+    <hr>
+    <p>Sub Total: $<span id="receipt-subtotal"></span></p>
+    <p>VAT (5%): $<span id="vat-tex"></span></p>
+    <p><strong>Total Due: $<span id="receipt-total"></span></strong></p>
+
+    <hr>
+    <p>Thank you for shopping!</p>
+</div>
+
+<script>
+let cartItems = [];
+let subtotal = 0;
+let vat = 0;
+let total = 0;
+
+
+// Prevent Enter from submitting
+document.getElementById("clientChair").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") e.preventDefault();
+});
+
+// Add item
+function addToCart(name, price) {
+    let item = cartItems.find(i => i.name === name);
+    if (item) item.qty++;
+    else cartItems.push({ name, price, qty: 1 });
+    updateCart();
+}
+
+// Remove item
+function removeFromCart(name) {
+    cartItems = cartItems.filter(item => item.name !== name);
+    updateCart();
+}
+
+// Update cart
+function updateCart() {
+    let cartDiv = document.getElementById("cart");
+    cartDiv.innerHTML = "";
+
+    subtotal = 0;
+
+    cartItems.forEach(item => {
+        let itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+
+        cartDiv.innerHTML += `
+            <div class="cart-item">
+                ${item.name} x ${item.qty} — $${itemTotal.toFixed(2)}
+                <button onclick="removeFromCart('${item.name}')">Remove</button>
+            </div>
+        `;
+    });
+
+    vat = subtotal * 0.05;          // 5% VAT
+    total = subtotal + vat;         // Total = Subtotal + VAT
+
+    document.getElementById("total").innerText =
+        "Total: $" + total.toFixed(2);
+}
+
+
+// Generate receipt preview
+function printReceipt() {
+    if (cartItems.length === 0) {
+        alert("Cart is empty!");
+        return;
+    }
+
+    document.getElementById("orderNumber").innerText = Math.floor(1000 + Math.random() * 9000);
+    const now = new Date();
+    document.getElementById("receiptDate").innerText = now.toLocaleString();
+    const chair = document.getElementById("clientChair").value || "N/A";
+    document.getElementById("receiptChair").innerText = chair;
+
+    let receiptDiv = document.getElementById("receipt-items");
+    receiptDiv.innerHTML = "";
+    cartItems.forEach(item => {
+        receiptDiv.innerHTML += `<p>${item.qty} ${item.name} ....... $${item.price * item.qty}</p>`;
+    });
+
+    document.getElementById("receipt-subtotal").innerText = subtotal.toFixed(2);
+    document.getElementById("vat-tex").innerText = vat.toFixed(2);
+
+    document.getElementById("receipt-total").innerText = total.toFixed(2);
+
+
+    document.getElementById("receipt").style.display = "block";
+
+    // Add thermal print button (only once)
+    if (!document.getElementById("thermalPrintBtn")) {
+        const btn = document.createElement("button");
+        btn.textContent = "Print to Thermal Printer";
+        btn.id = "thermalPrintBtn";
+        btn.style.marginTop = "15px";
+        btn.onclick = directThermalPrint;
+        document.getElementById("receipt").appendChild(btn);
+    }
+}
+
+// Direct thermal printing using QZ Tray
+function directThermalPrint() {
+    let orderNumber = document.getElementById("orderNumber").innerText;
+    let now = document.getElementById("receiptDate").innerText;
+    let chair = document.getElementById("receiptChair").innerText;
+
+    let text = "";
+    text += "         *** iShop ***\n";
+    text += "         Store #01\n";
+    text += "------------------------------\n";
+    text += "Order: " + orderNumber + "\n";
+    text += "Date:  " + now + "\n";
+    text += "Chair: " + chair + "\n";
+    text += "------------------------------\n";
+
+    cartItems.forEach(item => {
+        text += `${item.qty} x ${item.name}   $${(item.price * item.qty).toFixed(2)}\n`;
+    });
+
+    text += "------------------------------\n";
+    text += "SUBTOTAL: $" + subtotal.toFixed(2) + "\n";
+    text += "VAT (5%): $" + vat.toFixed(2) + "\n";
+    text += "TOTAL:    $" + total.toFixed(2) + "\n";
+    text += "------------------------------\n";
+    text += "Thank you for shopping!\n\n\n";
+
+    // Cut paper ESC/POS command
+    let cut = "\x1D\x56\x00";
+
+    let config = qz.configs.create(null); // default printer
+
+    let data = [
+        { type: 'raw', format: 'plain', data: text },
+        { type: 'raw', format: 'command', data: cut }
+    ];
+
+    qz.print(config, data).catch(err => {
+        console.error(err);
+        alert("Printer Error: " + err);
+    });
+}
+</script>
+
+</body>
+</html>

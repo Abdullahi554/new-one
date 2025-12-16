@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Receipt System</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<header class="sidebar">
+    <div class="logo">
+        <img src="shobo.jpg" alt="Logo">
+    </div>
+
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="presentation.html">Home</a></li>
+            <li><a href="burger.html">Burger</a></li>
+            <li><a href="pizza.html">Our Pizza</a></li>
+            <li><a href="Meat.html">Meat</a></li>
+            <li><a href="location.html">Location</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <div class="parallel">
+
+        <!-- LEFT -->
+        <div class="psub">
+            <form onsubmit="return false;">
+                Client Chair:
+                <input id="clientChair" type="number" placeholder="Enter client chair">
+            </form>
+
+            <button onclick="addToCart('Camel', 19)">Camel (19)</button>
+            <button onclick="addToCart('Goat', 14)">Goat ($14)</button>
+            <button onclick="addToCart('Beef', 12)">BEEF ($12)</button>
+            <button onclick="addToCart('venson', 25)">Venson ($25)</button>
+            <button onclick="addToCart('Horse', 23)">Horse ($23)</button>
+
+            <br><br>
+            <button onclick="printReceipt()">Generate Receipt</button>
+        </div>
+
+        <!-- RIGHT -->
+        <!-- RIGHT -->
+<div class="psubb">
+    <div class="cart-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Your Cart</h2>
+        <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
+    </div>
+    <div id="cart"></div>
+    <h3 id="total">Total: $0.00</h3>
+</div>
+
+
+    </div>
+
+    <!-- RECEIPT -->
+    <div id="receipt">
+        <h3>iShop</h3>
+        <p>Order#: <span id="orderNumber"></span></p>
+        <p>Date: <span id="receiptDate"></span></p>
+        <p>Chair: <span id="receiptChair"></span></p>
+        <hr>
+
+        <div id="receipt-items"></div>
+
+        <hr>
+        <p>Sub Total: $<span id="receipt-subtotal"></span></p>
+        <p>VAT (5%): $<span id="vat-tex"></span></p>
+        <p><strong>Total: $<span id="receipt-total"></span></strong></p>
+        <hr>
+        <p> THank you for shoping from us</p>
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+   <!--  <div class="hoyo">
+        <div class="mcn">
+            <h1>Thes Are Our Best Shirts We Have. Please Order It Right Now</h1>
+        </div>
+    </div><br>
+
+    <div class="service">
+         <div class="hole">
+            <a href="shpayment.html">
+                <div class="sup">
+                    <img src="shirt1.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this shirt is $10</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="shpayment.html">
+                <div class="sup">
+                    <img src="shirt2.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this shirt is $25</p>
+                </div>
+            </a>
+        </div> -->
+        
+
+      <!--  <div class="hole">
+            <a href="Tspayment.html">
+                <div class="sup">
+                    <img src="tsh3.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this T-shirt is $30</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="Tspayment.html">
+                <div class="sup">
+                    <img src="tsh4.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this T-shirt is $12</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="Tspayment.html">
+                <div class="sup">
+                    <img src="tsh5.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this T-shirt is $25</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="Tspayment.html">
+                <div class="sup">
+                    <img src="tsh6.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this T-shirt is $30</p>
+                </div>
+            </a>
+        </div>
+
+        
+    </div><br>
+
+    <div class="hoyo">
+        <div class="mcn">
+            <h1>This Are Our Best Trousers We Have. Please Order It Right Now</h1>
+        </div>
+    </div><br>
+    
+    <div class="service">
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr1.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $35</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr6.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $9</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr7.jpg" alt="" > 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $30</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr2.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $25</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr4.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $17</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="hole">
+            <a href="paying.html">
+                <div class="sup">
+                    <img src="tr5.jpg" alt=""> 
+                </div>
+                <div class="content">
+                    <p>the cost of this Trousers is $17</p>
+                </div>
+            </a>
+        </div>
+
+        
+    </div>-->
