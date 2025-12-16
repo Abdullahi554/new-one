@@ -492,3 +492,70 @@ form textarea {
     background: #c62828;
 }
 
+/* =========================
+   CLIENT CHAIR FORM (SAFE)
+   ========================= */
+.chair-form-box {
+    max-width: 320px;
+    background: linear-gradient(135deg, #ffffff, #f1f1f1);
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* subtle accent line */
+.chair-form-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 5px;
+    height: 60px;
+    background: linear-gradient(to bottom, #4CAF50, #000);
+    border-radius: 10px;
+}
+
+/* label */
+.chair-form-box label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* input field */
+.chair-form-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+/* focus effect */
+.chair-form-box input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* placeholder */
+.chair-form-box input::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+/* mobile friendly */
+@media (max-width: 600px) {
+    .chair-form-box {
+        max-width: 100%;
+    }
+}
+
+
