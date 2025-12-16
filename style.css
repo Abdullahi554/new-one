@@ -484,4 +484,11 @@ form textarea {
         max-width: 100%;
     }
 }
-/* clean
+.clear-cart-btn {
+    background: #e53935;
+}
+
+.clear-cart-btn:hover {
+    background: #c62828;
+}
+
