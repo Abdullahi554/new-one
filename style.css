@@ -485,9 +485,10 @@ form textarea {
     }
 }
 .clear-cart-btn {
-    background: #e53935;
+    background: linear-gradient(135deg, red, black);
 }
 
 .clear-cart-btn:hover {
     background: #c62828;
 }
+
