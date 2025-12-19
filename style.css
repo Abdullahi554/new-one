@@ -10,32 +10,41 @@ body {
 }
 
 /* SIDEBAR */
-/* Sidebar responsive fix */
-@media (max-width: 767px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .nav-menu {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .nav-menu li {
-        display: inline-block;
-    }
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media (min-width: 768px) {
-    .sidebar {
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
+.logo img {
+    width: 120px;
+    margin-bottom: 40px;
+}
+
+.nav-menu {
+    list-style: none;
+    width: 100%;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 14px 30px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-menu a:hover {
+    background: #fff;
+    color: #000;
+    padding-left: 40px;
 }
 
 /* MAIN CONTENT OFFSET */
@@ -477,79 +486,9 @@ form textarea {
 }
 .clear-cart-btn {
     background: linear-gradient(135deg, red, black);
-    border-radius: 20%;
+    border-radius: 50%;
 }
 
 .clear-cart-btn:hover {
     background: #c62828;
 }
-
-/* =========================
-   COMPACT CLIENT CHAIR FORM
-   ========================= */
-.chair-form-box {
-    max-width: 220px;
-    background: #fff;
-    padding: 12px 14px;
-    border-radius: 10px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    margin-bottom: 12px;
-    position: relative;
-}
-
-/* slim accent line */
-.chair-form-box::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 12px;
-    width: 3px;
-    height: 40px;
-    background: #4CAF50;
-    border-radius: 10px;
-}
-
-/* label */
-.chair-form-box label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 4px;
-}
-
-/* input */
-.chair-form-box input {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-    outline: none;
-    transition: 0.25s;
-}
-
-/* focus */
-.chair-form-box input:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-}
-
-/* placeholder */
-.chair-form-box input::placeholder {
-    font-size: 11px;
-    color: #aaa;
-}
-
-/* mobile */
-@media (max-width: 600px) {
-    .chair-form-box {
-        max-width: 100%;
-    }
-}
-
-
-
-
-
-
