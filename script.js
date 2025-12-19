@@ -120,10 +120,7 @@ function sendReceiptToServer(data) {
         alert("Receipt printed & saved successfully!");
         clearCart();
     })
-    .catch(err => {
-        console.error(err);
-        alert("Server error");
-    });
+    
 }
 
 /* =====================
@@ -169,3 +166,4 @@ function clearCart() {
     saveCart();
     updateCart();
 }
+
