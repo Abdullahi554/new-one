@@ -21,9 +21,9 @@
         <ul class="nav-menu">
             <li><a href="presentation.html">Home</a></li>
             <li><a href="burger.html">Burger</a></li>
-            <li><a href="pizza.html">Pizza</a></li>
+            <li><a href="pizza.html">Our Pizza</a></li>
             <li><a href="Meat.html">Meat</a></li>
-            <li><a href="Location.html">Location</a></li>
+            <li><a href="location.html">Location</a></li>
             <li><a href="Contact.html">Contact</a></li>
         </ul>
     </nav>
@@ -36,25 +36,16 @@
 
         <!-- LEFT -->
         <div class="psub">
-            <div class="chair-form-box">
-    <form onsubmit="return false;">
-        <label for="clientChair">Client Chair</label>
-        <input id="clientChair" type="number" placeholder="Enter client chair">
-    </form>
-</div>
-
+            <form onsubmit="return false;">
+                Client Chair:
+                <input id="clientChair" type="number" placeholder="Enter client chair">
+            </form>
 
             <button onclick="addToCart('Chicken', 10)">Chicken ($10)</button>
             <button onclick="addToCart('Pizza', 25)">Pizza ($25)</button>
             <button onclick="addToCart('Burger', 15)">Burger ($15)</button>
             <button onclick="addToCart('Sandwich', 5)">Sandwich ($5)</button>
             <button onclick="addToCart('Sanbusa', 1.5)">Sanbusa ($1.5)</button>
-
-            <button onclick="addToCart('Pizza Chicken', 17)">Pizza Chicken ($17)</button>
-            <button onclick="addToCart('Pizza Beef', 14)">Pizza Beef ($14)</button>
-            <button onclick="addToCart('Pizza Mashroom', 15)">Pizza Mashroom ($15)</button>
-            <button onclick="addToCart('Pizza Fish', 21)">Pizza Fish ($21)</button>
-            <button onclick="addToCart('Pizza Salad', 7)">Pizza Salad ($7)</button>
 
             <br><br>
             <button onclick="printReceipt()">Generate Receipt</button>
@@ -256,10 +247,3 @@
 
         
     </div>-->
-
-
-
-
-
-
-
