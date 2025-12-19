@@ -486,6 +486,7 @@ form textarea {
 }
 .clear-cart-btn {
     background: linear-gradient(135deg, red, black);
+    border-radius: 20%;
 }
 
 .clear-cart-btn:hover {
@@ -555,6 +556,7 @@ form textarea {
         max-width: 100%;
     }
 }
+
 
 
 
