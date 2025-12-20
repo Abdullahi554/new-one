@@ -5,250 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart & Receipt System</title>
 
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Your CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- QZ Tray -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
 </head>
 
-<body>
+<body class="bg-light">
 
-<!-- SIDEBAR -->
-<header class="sidebar">
-    <div class="logo">
-        <img src="shobo.jpg" alt="Logo">
+<!-- ===== MOBILE TOP BAR ===== -->
+<nav class="navbar navbar-dark bg-dark d-lg-none">
+    <div class="container-fluid">
+        <button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+            ☰ Menu
+        </button>
+        <span class="navbar-brand">iShop</span>
+    </div>
+</nav>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="offcanvas-lg offcanvas-start bg-dark text-white" tabindex="-1" id="sidebar">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button type="button" class="btn-close btn-close-white d-lg-none" data-bs-dismiss="offcanvas"></button>
     </div>
 
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="presentation.html">Home</a></li>
-            <li><a href="burger.html">Burger</a></li>
-            <li><a href="pizza.html">Pizza</a></li>
-            <li><a href="Meat.html">Meat</a></li>
-            <li><a href="location.html">Location</a></li>
-            <li><a href="Contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
-<!-- MAIN CONTENT -->
-<main class="main-content">
-
-    <div class="parallel">
-
-        <!-- LEFT -->
-        <div class="psub">
-            <form onsubmit="return false;">
-                Client Chair:
-                <input id="clientChair" type="number" placeholder="Enter client chair">
-            </form>
-
-            <button onclick="addToCart('Burger Chicken', 10)">Burger Chicken ($10)</button>
-            <button onclick="addToCart('Burger Beef', 4)">Burger Beef ($4)</button>
-            <button onclick="addToCart('Burger Salad', 7)">Burger alad ($15)</button>
-            <button onclick="addToCart('Burger Fish', 5)">Burger Fish ($5)</button>
-            <button onclick="addToCart('Burger Camel', 8)">Burger Camel ($1.5)</button>
-
-            <button onclick="addToCart('Burger Rice', 10)">Burger Rice ($10)</button>
-            <button onclick="addToCart('Burger Pean', 4)">Burger Pean ($4)</button>
-            <button onclick="addToCart('Burger Mashroom', 7)">Burger Mashroom ($15)</button>
-            <button onclick="addToCart('Burger Fish', 5)">Burger Fish ($5)</button>
-
-            <br><br>
-            <button onclick="printReceipt()">Generate Receipt</button>
+    <div class="offcanvas-body">
+        <div class="text-center mb-4">
+            <img src="shobo.jpg" class="img-fluid rounded" style="max-width:120px;" alt="Logo">
         </div>
 
-        <!-- RIGHT -->
-        <!-- RIGHT -->
-<div class="psubb">
-    <div class="cart-header" style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>Your Cart</h2>
-        <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
+        <ul class="nav flex-column nav-pills gap-2">
+            <li class="nav-item"><a class="nav-link text-white" href="presentation.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="burger.html">Burger</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="pizza.html">Pizza</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="Meat.html">Meat</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="location.html">Location</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="Contact.html">Contact</a></li>
+        </ul>
     </div>
-    <div id="cart"></div>
-    <h3 id="total">Total: $0.00</h3>
 </div>
 
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container-fluid">
+    <div class="row">
 
+        <!-- spacer for desktop sidebar -->
+        <div class="col-lg-2 d-none d-lg-block"></div>
+
+        <!-- content -->
+        <main class="col-lg-10 col-12 py-4">
+
+            <div class="row g-4">
+
+                <!-- LEFT PANEL -->
+                <div class="col-lg-6 col-12">
+                    <div class="card shadow-sm p-3">
+
+                        <form onsubmit="return false;" class="mb-3">
+                            <label class="form-label">Client Chair</label>
+                            <input id="clientChair" type="number" class="form-control" placeholder="Enter client chair">
+                        </form>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" onclick="addToCart('Burger Chicken', 10)">Burger Chicken ($10)</button>
+                            <button class="btn btn-primary" onclick="addToCart('Burger Beef', 4)">Burger Beef ($4)</button>
+                            <button class="btn btn-primary" onclick="addToCart('Burger Salad', 15)">Burger Salad ($15)</button>
+                            <button class="btn btn-primary" onclick="addToCart('Burger Fish', 5)">Burger Fish ($5)</button>
+                            <button class="btn btn-primary" onclick="addToCart('Burger Camel', 1.5)">Burger Camel ($1.5)</button>
+
+                            <button class="btn btn-secondary" onclick="addToCart('Burger Rice', 10)">Burger Rice ($10)</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Burger Pean', 4)">Burger Pean ($4)</button>
+                            <button class="btn btn-secondary" onclick="addToCart('Burger Mashroom', 15)">Burger Mashroom ($15)</button>
+                        </div>
+
+                        <button class="btn btn-success mt-4" onclick="printReceipt()">Generate Receipt</button>
+                    </div>
+                </div>
+
+                <!-- RIGHT PANEL -->
+                <div class="col-lg-6 col-12">
+                    <div class="card shadow-sm p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>Your Cart</h4>
+                            <button onclick="clearCart()" class="btn btn-danger btn-sm">Clear</button>
+                        </div>
+
+                        <div id="cart" class="my-3"></div>
+
+                        <h5 id="total">Total: $0.00</h5>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RECEIPT (hidden / printable) -->
+            <div id="receipt" class="mt-5 p-3 bg-white border rounded">
+                <h4>iShop</h4>
+                <p>Order#: <span id="orderNumber"></span></p>
+                <p>Date: <span id="receiptDate"></span></p>
+                <p>Chair: <span id="receiptChair"></span></p>
+                <hr>
+
+                <div id="receipt-items"></div>
+
+                <hr>
+                <p>Sub Total: $<span id="receipt-subtotal"></span></p>
+                <p>VAT (5%): $<span id="vat-tex"></span></p>
+                <p><strong>Total: $<span id="receipt-total"></span></strong></p>
+                <hr>
+                <p class="text-center">Thank you for shopping with us</p>
+            </div>
+
+        </main>
     </div>
+</div>
 
-    <!-- RECEIPT -->
-    <div id="receipt">
-        <h3>iShop</h3>
-        <p>Order#: <span id="orderNumber"></span></p>
-        <p>Date: <span id="receiptDate"></span></p>
-        <p>Chair: <span id="receiptChair"></span></p>
-        <hr>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <div id="receipt-items"></div>
-
-        <hr>
-        <p>Sub Total: $<span id="receipt-subtotal"></span></p>
-        <p>VAT (5%): $<span id="vat-tex"></span></p>
-        <p><strong>Total: $<span id="receipt-total"></span></strong></p>
-                        <hr>
-        <p> THank you for shoping from us</p>
-
-    </div>
-
-</main>
-
+<!-- Your JS -->
 <script src="script.js"></script>
+
 </body>
-</html>
-
-
-
-
-
-
-   <!--  <div class="hoyo">
-        <div class="mcn">
-            <h1>Thes Are Our Best Shirts We Have. Please Order It Right Now</h1>
-        </div>
-    </div><br>
-
-    <div class="service">
-         <div class="hole">
-            <a href="shpayment.html">
-                <div class="sup">
-                    <img src="shirt1.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this shirt is $10</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="shpayment.html">
-                <div class="sup">
-                    <img src="shirt2.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this shirt is $25</p>
-                </div>
-            </a>
-        </div> -->
-        
-
-      <!--  <div class="hole">
-            <a href="Tspayment.html">
-                <div class="sup">
-                    <img src="tsh3.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this T-shirt is $30</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="Tspayment.html">
-                <div class="sup">
-                    <img src="tsh4.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this T-shirt is $12</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="Tspayment.html">
-                <div class="sup">
-                    <img src="tsh5.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this T-shirt is $25</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="Tspayment.html">
-                <div class="sup">
-                    <img src="tsh6.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this T-shirt is $30</p>
-                </div>
-            </a>
-        </div>
-
-        
-    </div><br>
-
-    <div class="hoyo">
-        <div class="mcn">
-            <h1>This Are Our Best Trousers We Have. Please Order It Right Now</h1>
-        </div>
-    </div><br>
-    
-    <div class="service">
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr1.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $35</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr6.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $9</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr7.jpg" alt="" > 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $30</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr2.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $25</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr4.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $17</p>
-                </div>
-            </a>
-        </div>
-
-        <div class="hole">
-            <a href="paying.html">
-                <div class="sup">
-                    <img src="tr5.jpg" alt=""> 
-                </div>
-                <div class="content">
-                    <p>the cost of this Trousers is $17</p>
-                </div>
-            </a>
-        </div>
-
-        
-    </div>-->
+                    </html>
