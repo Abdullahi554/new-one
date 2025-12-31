@@ -5,19 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart & Receipt System</title>
 
+    <!-- ✅ Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ✅ Your existing CSS (UNCHANGED) -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- QZ Tray -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<header class="sidebar">
-    <div class="logo">
-        <img src="shobo.jpg" alt="Logo">
+<!-- ===== MOBILE TOP BAR ===== -->
+<nav class="navbar navbar-dark bg-dark d-lg-none">
+    <div class="container-fluid">
+        <button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+            ☰ Menu
+        </button>
+        <span class="navbar-brand">iShop</span>
+    </div>
+</nav>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="offcanvas offcanvas-start sidebar text-white" id="sidebar">
+    <div class="offcanvas-header d-lg-none">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
     </div>
 
-    <nav>
+    <div class="offcanvas-body">
+        <div class="logo text-center">
+            <img src="shobo.jpg" alt="Logo">
+        </div>
+
         <ul class="nav-menu">
             <li><a href="presentation.html">Home</a></li>
             <li><a href="burger.html">Burger</a></li>
@@ -26,67 +47,84 @@
             <li><a href="Location.html">Location</a></li>
             <li><a href="Contact.html">Contact</a></li>
         </ul>
-    </nav>
-</header>
-
-<!-- MAIN CONTENT -->
-<main class="main-content">
-
-    <div class="parallel">
-
-        <!-- LEFT -->
-        <div class="psub">
-            <form onsubmit="return false;">
-                Client Chair:
-                <input id="clientChair" type="number" placeholder="Enter client chair">
-            </form>
-
-            <button onclick="addToCart('Camel', 19)">Camel (19)</button>
-            <button onclick="addToCart('Goat', 14)">Goat ($14)</button>
-            <button onclick="addToCart('Beef', 12)">BEEF ($12)</button>
-            <button onclick="addToCart('venson', 25)">Venson ($25)</button>
-            <button onclick="addToCart('Horse', 23)">Horse ($23)</button>
-
-            <br><br>
-            <button onclick="printReceipt()">Generate Receipt</button>
-        </div>
-
-        <!-- RIGHT -->
-        <!-- RIGHT -->
-<div class="psubb">
-    <div class="cart-header" style="display: flex; justify-content: space-between; align-items: center;">
-        <h2>Your Cart</h2>
-        <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
     </div>
-    <div id="cart"></div>
-    <h3 id="total">Total: $0.00</h3>
 </div>
 
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container-fluid">
+    <div class="row">
 
+        <!-- spacer for desktop sidebar -->
+        <div class="col-lg-2 d-none d-lg-block"></div>
+
+        <main class="col-lg-10 col-12 main-content">
+
+            <div class="row g-4 parallel">
+
+                <!-- LEFT -->
+                <div class="col-lg-6 col-12">
+                    <div class="psub">
+
+                        <form onsubmit="return false;" class="mb-3">
+                            <label class="form-label">Client Chair</label>
+                            <input id="clientChair" type="number" class="form-control" placeholder="Enter client chair">
+                        </form>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button onclick="addToCart('Camel', 19)">Camel (19)</button>
+                            <button onclick="addToCart('Goat', 14)">Goat ($14)</button>
+                            <button onclick="addToCart('Beef', 12)">BEEF ($12)</button>
+                            <button onclick="addToCart('venson', 25)">Venson ($25)</button>
+                            <button onclick="addToCart('Horse', 23)">Horse ($23)</button>
+                        </div>
+
+                        <br>
+                        <button onclick="printReceipt()">Generate Receipt</button>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-lg-6 col-12">
+                    <div class="psubb">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2>Your Cart</h2>
+                            <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
+                        </div>
+
+                        <div id="cart" class="my-3"></div>
+                        <h3 id="total">Total: $0.00</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RECEIPT -->
+            <div id="receipt">
+                <h3>iShop</h3>
+                <p>Order#: <span id="orderNumber"></span></p>
+                <p>Date: <span id="receiptDate"></span></p>
+                <p>Chair: <span id="receiptChair"></span></p>
+                <hr>
+
+                <div id="receipt-items"></div>
+
+                <hr>
+                <p>Sub Total: $<span id="receipt-subtotal"></span></p>
+                <p>VAT (5%): $<span id="vat-tex"></span></p>
+                <p><strong>Total: $<span id="receipt-total"></span></strong></p>
+                <hr>
+                <p class="text-center">Thank you for shopping with us</p>
+            </div>
+
+        </main>
     </div>
+</div>
 
-    <!-- RECEIPT -->
-    <div id="receipt">
-        <h3>iShop</h3>
-        <p>Order#: <span id="orderNumber"></span></p>
-        <p>Date: <span id="receiptDate"></span></p>
-        <p>Chair: <span id="receiptChair"></span></p>
-        <hr>
+<!-- ✅ Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <div id="receipt-items"></div>
-
-        <hr>
-        <p>Sub Total: $<span id="receipt-subtotal"></span></p>
-        <p>VAT (5%): $<span id="vat-tex"></span></p>
-        <p><strong>Total: $<span id="receipt-total"></span></strong></p>
-        <hr>
-        <p> THank you for shoping from us</p>
-    </div>
-
-</main>
-
+<!-- Your JS -->
 <script src="script.js"></script>
+
 </body>
-</html>
-
-
+                             </html>
