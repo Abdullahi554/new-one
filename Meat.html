@@ -13,6 +13,61 @@
 
     <!-- QZ Tray -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qz-tray/2.1.4/qz-tray.js"></script>
+<style>
+    @media (min-width: 992px) {
+    #sidebar {
+        position: fixed;
+        transform: none !important;
+        visibility: visible !important;
+        width: 220px;
+    }
+
+    main {
+        margin-left: 220px;
+    }
+}
+    .order-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Order buttons style (like the picture) */
+.order-buttons button {
+    background-color: #6fb98f;   /* green */
+    color: #fff;
+    border: none;
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 4px;
+    min-width: 200px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.order-buttons button:hover {
+    background-color: #5aa77c;
+}
+
+/* Mobile: full width */
+@media (max-width: 576px) {
+    .order-buttons button {
+        width: 100%;
+    }
+    }
+    .order-btn-generate {
+    background: linear-gradient(135deg, green, black);
+    color: #fff;
+    border: none;
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 54px;
+    margin-top: 15px;
+    }
+</style>
 </head>
 
 <body>
@@ -128,3 +183,4 @@
 
 </body>
                              </html>
+
